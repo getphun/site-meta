@@ -18,7 +18,7 @@ return [
         ]
     ],
     '__dependencies' => [
-        '\\site-param'
+        '/site-param'
     ],
     '_services' => [
         'meta' => 'SiteMeta\\Service\\Meta'
