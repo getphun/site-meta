@@ -63,7 +63,6 @@ class Meta {
         
             // facebook js api
             if($dis->setting->facebook_js_tag){
-                $with_ads = $dis->setting->facebook_js_audience_network;
                 $app_id   = $dis->setting->facebook_app_id;
                 
                 $tx.= '<script>';
@@ -71,11 +70,8 @@ class Meta {
                 $tx.=       'var js,fjs=d.getElementsByTagName(s)[0];';
                 $tx.=       'if(d.getElementById(id)) return;';
                 $tx.=       'js=d.createElement(s);';
-                $tx.=       'js.id=id;js.src="//connect.facebook.net/en_US/sdk';
-                $tx.= $with_ads 
-                    ? '/xfbml.ad.js#xfbml=1&version=v2.5&appId='
-                    : '.js#xfbml=1&version=v2.6&appId=';
-                $tx.= $app_id;
+                $tx.=       'js.id=id;js.src="//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6&appId=';
+                $tx.=       $app_id;
                 $tx.=       '";fjs.parentNode.insertBefore(js,fjs);';
                 $tx.=   '}(document,\'script\',\'facebook-jssdk\'));';
                 $tx.= '</script>';

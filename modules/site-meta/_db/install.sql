@@ -1,6 +1,5 @@
 INSERT IGNORE INTO `site_param` ( `name`, `type`, `group`, `value` ) VALUES
     ( 'facebook_js_tag',                4, 'Third-Party JS',    '' ),
-    ( 'facebook_js_audience_network',   4, 'Third-Party JS',    '' ),
     
     ( 'alexa_analytics_account',        1, 'Code', '' ),
     ( 'alexa_analytics_domain',         1, 'Code', '' ),
