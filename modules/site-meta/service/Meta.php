@@ -65,7 +65,7 @@ class Meta {
             if($dis->setting->facebook_js_tag){
                 $app_id   = $dis->setting->facebook_app_id;
                 
-                $tx.= '<script>';
+                $tx.= '<script id="fbjs-sdk">';
                 $tx.=   '(function(d,s,id){';
                 $tx.=       'var js,fjs=d.getElementsByTagName(s)[0];';
                 $tx.=       'if(d.getElementById(id)) return;';
