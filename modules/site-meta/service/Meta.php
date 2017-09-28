@@ -51,6 +51,8 @@ class Meta {
         'twitter:title'                 => 'name',
         'twitter:url'                   => 'name',
         
+        'theme-color'                   => 'name',
+        
         'viewport'                      => 'name'
     ];
     
