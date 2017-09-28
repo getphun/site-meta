@@ -95,6 +95,11 @@ class Meta {
                 $tx.=   '<img src="https://d5nxst8fruw4z.cloudfront.net/atrk.gif?account=' . $account . '" style="display:none" height="1" width="1" alt="">';
                 $tx.= '</noscript>';
             }
+            
+            // instagram js embed
+            if($dis->setting->instagram_js_embed)
+                $tx.= '<script id="igjs-embed" async defer src="//platform.instagram.com/en_US/embeds.js"></script>';
+            
         }
         
         return $tx;
@@ -140,6 +145,7 @@ class Meta {
         $tx.= sprintf('<link rel="apple-touch-icon" href="%s">%s',                  $site . 'theme/site/static/logo/100x100.png', $nl);
         $tx.= sprintf('<link rel="apple-touch-icon" href="%s" sizes="72x72">%s',    $site . 'theme/site/static/logo/72x72.png', $nl);
         $tx.= sprintf('<link rel="apple-touch-icon" href="%s" sizes="114x114">%s',  $site . 'theme/site/static/logo/114x114.png', $nl);
+        $tx.= sprintf('<link rel="icon" href="%s" sizes="192x192">%s',              $site . 'theme/site/static/logo/192x192.png', $nl);
         
         // amphtml
         if(isset($metas['amphtml']))
@@ -190,7 +196,8 @@ class Meta {
                 'fb:pages'                  => 'facebook_page_id',
                 'google-site-verification'  => 'google_site_verification',
                 'p:domain_verify'           => 'pinterest_site_verification',
-                'yandex-verification'       => 'yandex_site_verification'
+                'yandex-verification'       => 'yandex_site_verification',
+                'theme-color'               => 'site_theme_color'
             ];
             
             foreach($front_setting as $name => $key){
