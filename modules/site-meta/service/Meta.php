@@ -80,7 +80,7 @@ class Meta {
             }
             
             // alexa analytics
-            if($dis->setting->alexa_analytics_account && $dis->setting->alexa_analytics_domain){
+            if(!is_dev() && $dis->setting->alexa_analytics_account && $dis->setting->alexa_analytics_domain){
                 $account = $dis->setting->alexa_analytics_account;
                 $domain  = $dis->setting->alexa_analytics_domain;
                 
@@ -168,7 +168,7 @@ class Meta {
         $tx.= sprintf('<title>%s</title>%s', hs($title), $nl);
         
         // google analytics
-        if($with_site_param && $dis->setting->google_analytics_property){
+        if(!is_dev() && $with_site_param && $dis->setting->google_analytics_property){
             $tx.= '<script>';
             $tx.=   '(function(i,s,o,g,r,a,m){';
             $tx.=       'i[\'GoogleAnalyticsObject\']=r;i[r]=i[r]||function(){';
