@@ -115,6 +115,7 @@ class Meta {
         
         $tx = '<meta charset="utf-8">' . $nl;
         $tx.= '<meta content="IE=edge" http-equiv="X-UA-Compatible">' . $nl;
+
         foreach($metas as $name => $value){
             if(!isset($this->meta_props[$name]))
                 continue;
@@ -136,6 +137,10 @@ class Meta {
                 $title = $with_site_param ? $dis->setting->frontpage_title : $dis->config->name;
             $tx.= sprintf('<link rel="alternate" href="%s" title="%s" type="application/rss+xml">%s', $metas['feed'], hs($title), $nl);
         }
+        
+        // hreflang
+        $lang = $dis->setting->site_language_location ?? $metas['hreflang'] ?? 'id-id';
+        $tx.= sprintf('<link rel="alternate" href="%s" hreflang="%s">%s', $metas['canonical'], $lang, $nl);
         
         // canonical
         if(isset($metas['canonical']))

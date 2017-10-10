@@ -4,6 +4,7 @@ INSERT IGNORE INTO `site_param` ( `name`, `type`, `group`, `value` ) VALUES
     
     ( 'site_name',                      1, 'Global', '' ),
     ( 'site_theme_color',               8, 'Global', '' ),
+    ( 'site_language_location',         1, 'Global', 'id-id' ),
     
     ( 'alexa_analytics_account',        1, 'Code', '' ),
     ( 'alexa_analytics_domain',         1, 'Code', '' ),
