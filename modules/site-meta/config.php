@@ -11,11 +11,7 @@ return [
     '__version' => '0.0.1',
     '__git' => 'https://github.com/getphun/site-meta',
     '__files' => [
-        'modules/site-meta' => [
-            'install',
-            'remove',
-            'update'
-        ]
+        'modules/site-meta' => [ 'install', 'remove', 'update' ]
     ],
     '__dependencies' => [
         '/site-param'

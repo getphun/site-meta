@@ -84,7 +84,7 @@ class Meta {
                 $account = $dis->setting->alexa_analytics_account;
                 $domain  = $dis->setting->alexa_analytics_domain;
                 
-                $tx.= '<script>';
+                $tx.= '<script id="alexa-sdk">';
                 $tx.=   '_atrk_opts={atrk_acct:"' . $account . '",domain:"' . $domain . '",dynamic: true};';
                 $tx.=   '(function(){var as=document.createElement(\'script\');';
                 $tx.=   'as.type=\'text/javascript\';';
@@ -112,7 +112,7 @@ class Meta {
         $metas = $this->parseMeta($obj->meta->_metas);
         $nl = is_dev() ? PHP_EOL : '';
         $with_site_param = module_exists('site-param');
-        
+
         $tx = '<meta charset="utf-8">' . $nl;
         $tx.= '<meta content="IE=edge" http-equiv="X-UA-Compatible">' . $nl;
 
@@ -173,7 +173,7 @@ class Meta {
         $tx.= sprintf('<title>%s</title>%s', hs($title), $nl);
         
         // google analytics
-        if(!is_dev() && $with_site_param && $dis->setting->google_analytics_property){
+        if(!is_dev() && !isset($obj->meta->isamp) && !isset($metas['amphtml']) && $with_site_param && $dis->setting->google_analytics_property){
             $tx.= '<script>';
             $tx.=   '(function(i,s,o,g,r,a,m){';
             $tx.=       'i[\'GoogleAnalyticsObject\']=r;i[r]=i[r]||function(){';
