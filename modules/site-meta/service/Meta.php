@@ -61,23 +61,16 @@ class Meta {
         
         $tx = '';
         
+        $facebook_js_tag = $obj->facebook_js_tag ?? false;
+        $fb_app_id       = null;
+        $instagram_js_tag= $obj->instagram_js_embed ?? false;
+        
         if(module_exists('site-param')){
+            $fb_app_id = $dis->setting->facebook_app_id;
         
             // facebook js api
-            if($dis->setting->facebook_js_tag){
-                $app_id   = $dis->setting->facebook_app_id;
-                
-                $tx.= '<script id="fbjs-sdk">';
-                $tx.=   '(function(d,s,id){';
-                $tx.=       'var js,fjs=d.getElementsByTagName(s)[0];';
-                $tx.=       'if(d.getElementById(id)) return;';
-                $tx.=       'js=d.createElement(s);';
-                $tx.=       'js.id=id;js.src="//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6&appId=';
-                $tx.=       $app_id;
-                $tx.=       '";fjs.parentNode.insertBefore(js,fjs);';
-                $tx.=   '}(document,\'script\',\'facebook-jssdk\'));';
-                $tx.= '</script>';
-            }
+            if($dis->setting->facebook_js_tag)
+                $facebook_js_tag = true;
             
             // alexa analytics
             if(!is_dev() && $dis->setting->alexa_analytics_account && $dis->setting->alexa_analytics_domain){
@@ -100,9 +93,24 @@ class Meta {
             
             // instagram js embed
             if($dis->setting->instagram_js_embed)
-                $tx.= '<script id="igjs-embed" async defer src="//platform.instagram.com/en_US/embeds.js"></script>';
-            
+                $instagram_js_tag = true;
         }
+        
+        if($facebook_js_tag){
+            $tx.= '<script id="fbjs-sdk">';
+            $tx.=   '(function(d,s,id){';
+            $tx.=       'var js,fjs=d.getElementsByTagName(s)[0];';
+            $tx.=       'if(d.getElementById(id)) return;';
+            $tx.=       'js=d.createElement(s);';
+            $tx.=       'js.id=id;js.src="//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6&appId=';
+            $tx.=       $fb_app_id;
+            $tx.=       '";fjs.parentNode.insertBefore(js,fjs);';
+            $tx.=   '}(document,\'script\',\'facebook-jssdk\'));';
+            $tx.= '</script>';
+        }
+        
+        if($instagram_js_tag)
+            $tx.= '<script id="igjs-embed" async defer src="//platform.instagram.com/en_US/embeds.js"></script>';
         
         return $tx;
     }
