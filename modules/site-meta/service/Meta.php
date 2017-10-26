@@ -64,6 +64,7 @@ class Meta {
         $facebook_js_tag = $obj->facebook_js_tag ?? false;
         $fb_app_id       = null;
         $instagram_js_tag= $obj->instagram_js_embed ?? false;
+        $twitter_js_tag  = $obj->twitter_js_embed ?? false;
         
         if(module_exists('site-param')){
             $fb_app_id = $dis->setting->facebook_app_id;
@@ -94,6 +95,10 @@ class Meta {
             // instagram js embed
             if($dis->setting->instagram_js_embed)
                 $instagram_js_tag = true;
+            
+            // twitter js embed
+            if($dis->setting->twitter_js_embed)
+                $twitter_js_tag = true;
         }
         
         if($facebook_js_tag){
@@ -112,6 +117,9 @@ class Meta {
         if($instagram_js_tag)
             $tx.= '<script id="igjs-embed" async defer src="//platform.instagram.com/en_US/embeds.js"></script>';
         
+        if($twitter_js_tag)
+            $tx.= '<script id="twjs-embed" async defer src="https://platform.twitter.com/widgets.js"></script>';
+            
         return $tx;
     }
     

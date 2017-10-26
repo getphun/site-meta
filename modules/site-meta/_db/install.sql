@@ -1,6 +1,7 @@
 INSERT IGNORE INTO `site_param` ( `name`, `type`, `group`, `value` ) VALUES
     ( 'facebook_js_tag',                4, 'Third-Party JS', '' ),
     ( 'instagram_js_embed',             4, 'Third-Party JS', '' ),
+    ( 'twitter_js_embed',               4, 'Third-Party JS', '' ),
     
     ( 'site_name',                      1, 'Global', '' ),
     ( 'site_theme_color',               8, 'Global', '' ),
