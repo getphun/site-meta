@@ -197,7 +197,7 @@ class Meta {
         $tx.= sprintf('<title>%s</title>%s', hs($title), $nl);
         
         // google analytics
-        if(!is_dev() && !isset($obj->meta->isamp) && !isset($metas['amphtml']) && $with_site_param && $dis->setting->google_analytics_property){
+        if(!is_dev() && !isset($obj->meta->isamp) && $with_site_param && $dis->setting->google_analytics_property){
             $tx.= '<script>';
             $tx.=   '(function(i,s,o,g,r,a,m){';
             $tx.=       'i[\'GoogleAnalyticsObject\']=r;i[r]=i[r]||function(){';
@@ -309,5 +309,24 @@ class Meta {
         }
         
         return $used_metas;
+    }
+    
+    public function schemaOrganization(){
+        $dis = \Phun::$dispatcher;
+        $base_url = $dis->router->to('siteHome');
+        
+        $schema = [
+            '@type'         => 'Organization',
+            'name'          => $dis->config->name,
+            'url'           => $base_url,
+            'logo'          => [
+                '@type'         => 'ImageObject',
+                'url'           => $base_url . 'theme/site/static/logo/200x60.png',
+                'height'        => 60,
+                'width'         => 200
+            ]
+        ];
+        
+        return $schema;
     }
 }
