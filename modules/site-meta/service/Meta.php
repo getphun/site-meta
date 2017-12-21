@@ -200,14 +200,25 @@ class Meta {
         if(!is_dev() && !isset($obj->meta->isamp) && $with_site_param && $dis->setting->google_analytics_property){
             $tx.= '<script>';
             $tx.=   '(function(i,s,o,g,r,a,m){';
-            $tx.=       'i[\'GoogleAnalyticsObject\']=r;i[r]=i[r]||function(){';
+            $tx.=       "i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){";
             $tx.=           '(i[r].q=i[r].q||[]).push(arguments)';
             $tx.=       '},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)';
-            $tx.=   '})(window,document,\'script\',\'//www.google-analytics.com/analytics.js\',\'ga\');';
+            $tx.=   "})(window,document,'script','//www.google-analytics.com/analytics.js','ga');";
+            
             if(isset($metas['ga_group']))
-                $tx.= 'ga(\'set\', \'contentGroup1\', \'' . $metas['ga_group'] . '\');';
-            $tx.=   'ga(\'create\',\'' . $dis->setting->google_analytics_property . '\',\'auto\');';
-            $tx.=   'ga(\'send\',\'pageview\');';
+                $tx.= "ga('set', 'contentGroup1', '{$metas['ga_group']}');";
+            
+            if($dis->setting->google_analytics_domains){
+                $domains = json_encode(explode(' ', $dis->setting->google_analytics_domains));
+                
+                $tx.=   "ga('create','{$dis->setting->google_analytics_property}','auto',{'allowLinker': true});";
+                $tx.=   "ga('require', 'linker');";
+                $tx.=   "ga('linker:autoLink', {$domains});";
+            }else{
+                $tx.=   "ga('create','{$dis->setting->google_analytics_property}','auto');";
+            }
+            
+            $tx.=   "ga('send','pageview');";
             $tx.= '</script>' . $nl;
         }
         
